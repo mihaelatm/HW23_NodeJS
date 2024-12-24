@@ -1,4 +1,4 @@
-// Task 1
+// task 1
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,36 +35,69 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-// function delay(ms: number): Promise<string> {
-//   return new Promise((resolve) =>
-//     setTimeout(() => resolve(`Completed after ${ms} ms`), ms)
-//   );
-// }
-// async function processPromisesSequentially() {
-//   const result1 = await delay(1000);
-//   console.log(result1);
-//   const result2 = await delay(2000);
-//   console.log(result2);
-//   const result3 = await delay(1500);
-//   console.log(result3);
-// }
-// processPromisesSequentially();
-// // Task 2
-// async function processStrings(strings: string[]): Promise<string[]> {
-//   const promises = strings.map(
-//     (str) =>
-//       new Promise<string>((resolve) => {
-//         setTimeout(() => resolve(str.toUpperCase()), 1000);
-//       })
-//   );
-//   return await Promise.all(promises);
-// }
-// async function testProcessStrings() {
-//   const strings = ["hello", "world", "typescript", "async"];
-//   const result = await processStrings(strings);
-//   console.log(result);
-// }
-// testProcessStrings();
+function delay(ms) {
+    return new Promise(function (resolve) {
+        return setTimeout(function () { return resolve("Completed after ".concat(ms, " ms")); }, ms);
+    });
+}
+function processPromisesSequentially() {
+    return __awaiter(this, void 0, void 0, function () {
+        var result1, result2, result3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, delay(1000)];
+                case 1:
+                    result1 = _a.sent();
+                    console.log(result1);
+                    return [4 /*yield*/, delay(2000)];
+                case 2:
+                    result2 = _a.sent();
+                    console.log(result2);
+                    return [4 /*yield*/, delay(1500)];
+                case 3:
+                    result3 = _a.sent();
+                    console.log(result3);
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+processPromisesSequentially();
+//  task 2
+function processStrings(strings) {
+    return __awaiter(this, void 0, void 0, function () {
+        var promises;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    promises = strings.map(function (str) {
+                        return new Promise(function (resolve) {
+                            setTimeout(function () { return resolve(str.toUpperCase()); }, 1000);
+                        });
+                    });
+                    return [4 /*yield*/, Promise.all(promises)];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
+function testProcessStrings() {
+    return __awaiter(this, void 0, void 0, function () {
+        var strings, result;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    strings = ["hello", "typescript", "nodejs"];
+                    return [4 /*yield*/, processStrings(strings)];
+                case 1:
+                    result = _a.sent();
+                    console.log(result);
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+testProcessStrings();
 // task 3
 function delay(ms) {
     return new Promise(function (resolve) {
@@ -100,3 +133,25 @@ function handleErrorInPromises() {
     });
 }
 handleErrorInPromises();
+// task 4
+function dynamicDelay(numbers) {
+    return __awaiter(this, void 0, void 0, function () {
+        var promises, results;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    promises = numbers.map(function (num) {
+                        return new Promise(function (resolve) {
+                            return setTimeout(function () { return resolve("Resolved after ".concat(num, " ms")); }, num);
+                        });
+                    });
+                    return [4 /*yield*/, Promise.all(promises)];
+                case 1:
+                    results = _a.sent();
+                    console.log(results);
+                    return [2 /*return*/];
+            }
+        });
+    });
+}
+dynamicDelay([1000, 2000, 1500]);
