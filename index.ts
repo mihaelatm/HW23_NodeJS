@@ -38,3 +38,28 @@
 // }
 
 // testProcessStrings();
+
+// task 3
+
+function delay(ms: number): Promise<string> {
+  return new Promise((resolve) =>
+    setTimeout(() => resolve(`Completed after ${ms} ms`), ms)
+  );
+}
+
+async function handleErrorInPromises() {
+  const promise1 = delay(1000);
+  const promise2 = delay(2000);
+  const promise3 = new Promise<string>((_, reject) =>
+    setTimeout(() => reject("Error in Promise 3"), 1500)
+  );
+
+  try {
+    const results = await Promise.all([promise1, promise2, promise3]);
+    console.log(results);
+  } catch (error) {
+    console.error(`Caught error: ${error}`);
+  }
+}
+
+handleErrorInPromises();
