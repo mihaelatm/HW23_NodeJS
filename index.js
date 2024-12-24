@@ -1,3 +1,4 @@
+// Task 1
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,31 +35,68 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+// function delay(ms: number): Promise<string> {
+//   return new Promise((resolve) =>
+//     setTimeout(() => resolve(`Completed after ${ms} ms`), ms)
+//   );
+// }
+// async function processPromisesSequentially() {
+//   const result1 = await delay(1000);
+//   console.log(result1);
+//   const result2 = await delay(2000);
+//   console.log(result2);
+//   const result3 = await delay(1500);
+//   console.log(result3);
+// }
+// processPromisesSequentially();
+// // Task 2
+// async function processStrings(strings: string[]): Promise<string[]> {
+//   const promises = strings.map(
+//     (str) =>
+//       new Promise<string>((resolve) => {
+//         setTimeout(() => resolve(str.toUpperCase()), 1000);
+//       })
+//   );
+//   return await Promise.all(promises);
+// }
+// async function testProcessStrings() {
+//   const strings = ["hello", "world", "typescript", "async"];
+//   const result = await processStrings(strings);
+//   console.log(result);
+// }
+// testProcessStrings();
+// task 3
 function delay(ms) {
     return new Promise(function (resolve) {
         return setTimeout(function () { return resolve("Completed after ".concat(ms, " ms")); }, ms);
     });
 }
-function processPromisesSequentially() {
+function handleErrorInPromises() {
     return __awaiter(this, void 0, void 0, function () {
-        var result1, result2, result3;
+        var promise1, promise2, promise3, results, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, delay(1000)];
+                case 0:
+                    promise1 = delay(1000);
+                    promise2 = delay(2000);
+                    promise3 = new Promise(function (_, reject) {
+                        return setTimeout(function () { return reject("Error in Promise 3"); }, 1500);
+                    });
+                    _a.label = 1;
                 case 1:
-                    result1 = _a.sent();
-                    console.log(result1); // Ar trebui să loghezi acest mesaj
-                    return [4 /*yield*/, delay(2000)];
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, Promise.all([promise1, promise2, promise3])];
                 case 2:
-                    result2 = _a.sent();
-                    console.log(result2); // Ar trebui să loghezi acest mesaj
-                    return [4 /*yield*/, delay(1500)];
+                    results = _a.sent();
+                    console.log(results);
+                    return [3 /*break*/, 4];
                 case 3:
-                    result3 = _a.sent();
-                    console.log(result3); // Ar trebui să loghezi acest mesaj
-                    return [2 /*return*/];
+                    error_1 = _a.sent();
+                    console.error("Caught error: ".concat(error_1));
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
             }
         });
     });
 }
-processPromisesSequentially(); // Asigură-te că funcția este apelată
+handleErrorInPromises();
